@@ -1046,7 +1046,7 @@ setup(void)
 	vis = XGetVisualInfo(dpy, VisualScreenMask | VisualDepthMask | VisualClassMask, &tpl, &nvi);
 	for(i = 0; i < nvi; i ++) {
 		fmt = XRenderFindVisualFormat(dpy, vis[i].visual);
-		if (fmt->type == PictTypeDirect && fmt->direct.alphaMask) {
+		if ((fmt->type == PictTypeDirect && fmt->direct.alphaMask) || 1) {
 			visual = vis[i].visual;
 			break;
 		}
@@ -1081,7 +1081,7 @@ setup(void)
 	visual, CWBackPixmap | CWBorderPixel | CWBitGravity
 	| CWEventMask | CWColormap, &attrs);
 
-	dc.drawable = XCreatePixmap(dpy, win, ww, wh,
+	dc.drawable = XCreatePixmap(dpy, root, ww, wh,
 	                            32);
 	dc.gc = XCreateGC(dpy, dc.drawable, 0, 0);
 
